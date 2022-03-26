@@ -1,0 +1,3 @@
+from .moving_average_20_schema import MovingAverage20Schema
+from .moving_average_50_schema import MovingAverage50Schema
+from .moving_average_200_schema import MovingAverage200Schema

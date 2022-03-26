@@ -1,5 +1,5 @@
-from api.domain.models import MovingAverage
-from api.infra.repository.moving_average_repository import MovingAverageRepository
+from domain.models import MovingAverage
+from infra.repository.moving_average_repository import MovingAverageRepository
 from typing import Type, Dict
 
 
@@ -18,7 +18,6 @@ class MovingAverage():
         """
 
         response = None
-        #validate_entry = isinstance(name, str) and isinstance(password, str)
         validate_entry = True
 
         if validate_entry:
@@ -27,7 +26,7 @@ class MovingAverage():
 
 
 
-    def get_mms(self, pair: str, from_timestamp: int, to_timestamp: int, range: str) -> Dict[bool, MovingAverage]:
+    def get_mms(self, pair: str, from_timestamp: int, to_timestamp: int, range: int) -> Dict[bool, MovingAverage]:
         """Find MMS
         :param - pair: pair crypto
                - from_timestamp: from date timestamp
@@ -36,7 +35,6 @@ class MovingAverage():
         """
 
         response = None
-        #validate_entry = isinstance(name, str) and isinstance(password, str)
         validate_entry = True
 
         if validate_entry:

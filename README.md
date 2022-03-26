@@ -23,14 +23,14 @@ git clone https://github.com/githubgoncalves/variacoes-medias-moveis-simples
 
 Vá para o diretório do projeto:
 ```bash
-cd variacoes-medias-moveis-simples
+cd variacoes-medias-moveis-simples\api
 ```
 Execute o aplicativo com o seguinte comando para executar o container docker:
 ```bash
 
-docker build -t api-flask-variacoes-medias-moveis-simples . 
+docker build -t api-flask-medias-moveis-mb . 
 
-docker run -p 5000:5000 api-flask-variacoes-medias-moveis-simples 
+docker run -p 8003:8003 api-flask-medias-moveis-mb
 
 ```
 

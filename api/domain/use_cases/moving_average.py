@@ -1,6 +1,6 @@
 from typing import Dict
 from abc import ABC, abstractclassmethod
-from api.domain.models import MovingAverage
+from domain.models import MovingAverage
 
 
 class MovingAverage(ABC):

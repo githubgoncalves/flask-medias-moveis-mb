@@ -5,9 +5,7 @@ from pathlib import Path
 
 #file_path = os.path.abspath(os.getcwd())+"\database.db"
 
-path = Path(__file__).resolve(). \
-                parent / "database.db"
-
+path = Path(__file__).resolve().parent / "database.db"
 file_path = os.path.abspath(path)
 
 class DBConnectionHandler:

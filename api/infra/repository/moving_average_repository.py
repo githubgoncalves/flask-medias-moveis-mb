@@ -1,8 +1,10 @@
 """ Repository to User Entity """
-from api.domain.models import MovingAverage
-from api.infra.config import DBConnectionHandler
-from api.domain.interfaces.repository import UserRepositoryInterface
-from sqlalchemy import text
+from domain.models import MovingAverage
+from infra.config import DBConnectionHandler
+from infra.schemas import (MovingAverage20Schema,
+                           MovingAverage50Schema,
+                           MovingAverage200Schema)
+from sqlalchemy import text, func, and_
 from typing import List
 import pandas as pd
 
@@ -10,23 +12,43 @@ import pandas as pd
 class MovingAverageRepository():
     """Class to manage User Repository"""
 
-    def select(cls, pair: str, from_timestamp: int, to_timestamp: int, range: str) -> List[MovingAverage]:
+    def select(cls, pair: str, from_timestamp: int, to_timestamp: int, range: int) -> List[MovingAverage]:
         """Find MMS
         :param - pair: pair crypto
                - from_timestamp: from date timestamp
                - to_timestamp: to date timestamp
         :return - Dictionary with information of the process
         """
+
         try:
             query_data = None
             if pair and from_timestamp and to_timestamp and range:
                 with DBConnectionHandler() as db_connection:
-                    data = (
-                        db_connection.session.query(MovingAverage)
-                        .filter_by(pair=pair, timestamp=from_timestamp)
-                        .one()
-                    ) 
-                    query_data = [data]
+                    if range == 20:
+                        data = (
+                            db_connection.session.query(MovingAverage).filter(MovingAverage.pair == pair,
+                                                                              MovingAverage.mms_20 != None,
+                                                                              MovingAverage.timestamp >= from_timestamp,
+                                                                              MovingAverage.timestamp <= to_timestamp)
+                        )
+                        query_data = [MovingAverage20Schema.from_orm(d) for d in data]
+                    elif range == 50:
+                        data = (
+                            db_connection.session.query(MovingAverage).filter(MovingAverage.pair == pair,
+                                                                              MovingAverage.mms_50 != None,
+                                                                              MovingAverage.timestamp >= from_timestamp,
+                                                                              MovingAverage.timestamp <= to_timestamp)
+                        )
+                        query_data = [MovingAverage50Schema.from_orm(d) for d in data]
+                    else:
+                        data = (
+                            db_connection.session.query(MovingAverage).filter(MovingAverage.pair == pair,
+                                                                              MovingAverage.mms_200 != None,
+                                                                              MovingAverage.timestamp >= from_timestamp,
+                                                                              MovingAverage.timestamp <= to_timestamp)
+                        )
+                        query_data = [MovingAverage200Schema.from_orm(d) for d in data]
+
             return query_data
 
         except:
@@ -49,7 +71,6 @@ class MovingAverageRepository():
             result = db_connection.get_engine().execute(text(table_column_names))
             column_names = list()
             for row in result:
-                #if row[1] not in 'id':
                 column_names.append(row[1])
                 print("Coluna:", row[1])
 

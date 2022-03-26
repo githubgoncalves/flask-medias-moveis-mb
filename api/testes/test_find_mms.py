@@ -1,6 +1,6 @@
 import pytest
 import mock
-from api.app import app
+from app import app
 
 
 TARGET_ADAPTER_REQUEST = (

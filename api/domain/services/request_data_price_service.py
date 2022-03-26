@@ -1,4 +1,4 @@
-from api.infra.repository.request_data_price_repository import RequestDataPriceRepository
+from infra.repository.request_data_price_repository import RequestDataPriceRepository
 from typing import List, Type, Dict
 import pandas as pd
 
@@ -9,7 +9,7 @@ class RequestDataPriceService():
     def __init__(self, request_api_repository: Type[RequestDataPriceRepository]) -> None:
         self.request_api_repository = request_api_repository
 
-    def request_data_price(self, pair, from_timestamp, to_timestamp, precision) -> List:
+    def request_data_price(self, pair, from_timestamp, to_timestamp) -> List:
         """Request API
         :param - pair: pair crypto
                - from_timestamp: from date timestamp
@@ -21,11 +21,11 @@ class RequestDataPriceService():
         response = None
         validate_entry = isinstance(pair, str) \
                          and isinstance(from_timestamp, int) \
-                         and isinstance(to_timestamp, int)\
-                         and isinstance(precision, str)
+                         and isinstance(to_timestamp, int)
+
 
         if validate_entry:
-            response = self.request_api_repository.consulta(pair, from_timestamp, to_timestamp, precision)
+            response = self.request_api_repository.consulta(pair, from_timestamp, to_timestamp)
             df = pd.DataFrame.from_records(response["Data"])
             df_calculete_mm = self.calculate_simple_moving_average(df)
             df_data_insert = df_calculete_mm[['timestamp', 'mms_20', 'mms_50', 'mms_200']]

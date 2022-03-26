@@ -1,7 +1,7 @@
 """Design Pattern """
-from api.application.presenters.controllers import RequestAPIController
-from api.infra.repository import RequestDataPriceRepository
-from api.infra.repository import MovingAverageRepository
+from application.presenters.controllers import RequestAPIController
+from infra.repository import RequestDataPriceRepository
+from infra.repository import MovingAverageRepository
 
 
 def request_api():

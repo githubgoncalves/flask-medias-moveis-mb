@@ -1,4 +1,4 @@
-from api.infra.config.db_config import DBConnectionHandler
+from infra.config.db_config import DBConnectionHandler
 from sqlalchemy import MetaData, Table, Column, Integer, TIMESTAMP, String
 
 

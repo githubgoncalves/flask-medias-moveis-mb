@@ -16,13 +16,13 @@ class Pair(str, Enum):
 class RequestDataPriceRepository():
     """Class to manage Consulta API"""
 
-    def consulta(self, pair, from_timestamp, to_timestamp, precision) -> List:
+    def consulta(self, pair, from_timestamp, to_timestamp) -> List:
 
         """URL de exemplo utilizada na consulta dos dados"""
         """https://mobile.mercadobitcoin.com.br/v4/BRLBTC/candle?from=1577836800&to=1606565306&precision=1d"""
 
         url = f"https://mobile.mercadobitcoin.com.br/v4/{pair}/candle?from=" \
-              f"{from_timestamp}&to={to_timestamp}&precision={precision}"
+              f"{from_timestamp}&to={to_timestamp}&precision=1d"
 
         req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36'})
         response = urlopen(req).read()

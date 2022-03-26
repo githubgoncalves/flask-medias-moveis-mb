@@ -1,8 +1,8 @@
 from typing import Type
 from sqlalchemy.exc import IntegrityError
-from api.main.interface import RouteInterface as Route
-from api.application.presenters.helpers import HttpRequest, HttpResponse
-from api.application.presenters.errors import HttpErrors
+from main.interface import RouteInterface as Route
+from application.presenters.helpers import HttpRequest, HttpResponse
+from application.presenters.errors import HttpErrors
 
 
 def flask_adapter(request: any, api_route: Type[Route]) -> any:

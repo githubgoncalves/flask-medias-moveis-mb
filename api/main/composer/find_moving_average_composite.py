@@ -1,6 +1,6 @@
-from api.application.presenters.controllers import FindMovingAverageController
-from api.domain.services import MovingAverage
-from api.infra.repository.moving_average_repository import MovingAverageRepository
+from application.presenters.controllers import FindMovingAverageController
+from domain.services import MovingAverage
+from infra.repository.moving_average_repository import MovingAverageRepository
 
 
 def find_moving_average_composer(pair) -> FindMovingAverageController:

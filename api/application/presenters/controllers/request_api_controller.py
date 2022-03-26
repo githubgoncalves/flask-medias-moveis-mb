@@ -1,7 +1,7 @@
 from typing import Type
-from api.domain.services import RequestDataPriceService
-from api.domain.services import MovingAverage
-from api.application.presenters import HttpRequest, HttpResponse, HttpErrors
+from domain.services import RequestDataPriceService
+from domain.services import MovingAverage
+from application.presenters import HttpRequest, HttpResponse, HttpErrors
 
 
 class RequestAPIController():
@@ -27,14 +27,11 @@ class RequestAPIController():
                 from_timestamp = int(http_request.body["from_timestamp"])
             if "to_timestamp" in body_params:
                 to_timestamp = int(http_request.body["to_timestamp"])
-            if "precision" in body_params:
-                precision = str(http_request.body["precision"]).strip().lower()
 
             if (pair != '' and pair != None
                     and from_timestamp != '' and from_timestamp != None
-                    and to_timestamp != '' and to_timestamp != None
-                    and precision != '' and precision != None):
-                response = self.request_api.request_data_price(pair, from_timestamp, to_timestamp, precision)
+                    and to_timestamp != '' and to_timestamp != None):
+                response = self.request_api.request_data_price(pair, from_timestamp, to_timestamp)
         elif http_request.query:
             body_params = http_request.query
 
@@ -44,14 +41,11 @@ class RequestAPIController():
                 from_timestamp = int(body_params["from_timestamp"])
             if "to_timestamp" in body_params:
                 to_timestamp = int(body_params["to_timestamp"])
-            if "precision" in body_params:
-                precision = str(body_params["precision"]).strip().lower()
 
             if (pair != '' and pair != None
                     and from_timestamp != '' and from_timestamp != None
-                    and to_timestamp != '' and to_timestamp != None
-                    and precision != '' and precision != None):
-                response = self.request_api.request_data_price(pair, from_timestamp, to_timestamp, precision)
+                    and to_timestamp != '' and to_timestamp != None):
+                response = self.request_api.request_data_price(pair, from_timestamp, to_timestamp)
         else:
             response = {"Success": False, "Data": None}
 
